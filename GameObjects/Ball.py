@@ -14,7 +14,6 @@ class Ball:
         self.shape = pymunk.Circle(self.body, 10, (0, 0))
         self.shape.friction = 0.5
         self.shape.collision_type = COLLTYPE_BALL
-        pass
 
 
     def draw(self, screen):

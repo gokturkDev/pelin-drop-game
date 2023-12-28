@@ -7,9 +7,14 @@ class Game:
         self.space = space
         self.balls = []
 
+    
     def draw(self):
         self.screen.fill(pygame.Color("white"))
-        # Display some text
+        self._draw_title()
+        for ball in self.balls:
+            ball.draw(self.screen)
+
+    def _draw_title(self):
         font = pygame.font.Font(None, 16)
         text = """LMB: Create ball
         LMB + Shift: Create many balls
@@ -21,10 +26,7 @@ class Game:
             self.screen.blit(text, (5, y))
             y += 10
 
-        for ball in self.balls:
-            ball.draw()
-
 
     def add_ball(self, ball):
         self.space.add(ball.body, ball.shape)
-        self.balls.append(ball.shape)
+        self.balls.append(ball)

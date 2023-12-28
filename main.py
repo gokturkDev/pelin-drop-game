@@ -16,13 +16,16 @@ def render(game):
     game.draw()
 
 
+def should_quit_loop(event):
+    if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
+        return True
+
 def main():
     ### PyGame init
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_SIZE[0], SCREEN_SIZE[1]))
     clock = pygame.time.Clock()
     running = True
-    font = pygame.font.SysFont("Arial", 16)
 
     ### Physics stuff
     space = pymunk.Space()
@@ -44,6 +47,9 @@ def main():
 
     while running:
         for event in pygame.event.get():
+            if (should_quit_loop(event)):
+                running = False
+                break
             process_input(event, game)
             
         if should_update:
