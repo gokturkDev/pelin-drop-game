@@ -8,4 +8,5 @@ class Mouse:
         self.shape.collision_type = COLLTYPE_MOUSE
 
     def mouse_coll_func(arbiter, space, data):
+        print("MOUSE COLLIDED")
         return None

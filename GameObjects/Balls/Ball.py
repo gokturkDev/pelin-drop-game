@@ -12,15 +12,14 @@ class Ball:
        self.entity_id = "ball"
        self.body = body
        self.shape = shape
-
+       self.shape.collision_type = COLLTYPE_BALL
        self.sprite = None
 
     def draw(self, screen):
         if (self.sprite is None):
             raise Exception("Abstract Class Ball cannot be drawn")
         p = pymunk.Vec2d(self.body.position.x, flipy(self.body.position.y))
-        # we need to rotate 180 degrees because of the y coordinate flip
-        angle_degrees = math.degrees(self.shape.body.angle) + 180
+        angle_degrees = math.degrees(self.shape.body.angle)
         rotated_sprite= pygame.transform.rotate(self.sprite, angle_degrees)
         offset = pymunk.Vec2d(*rotated_sprite.get_size()) / 2
         p = p - offset

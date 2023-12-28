@@ -1,3 +1,4 @@
+from functools import partial
 import pygame
 import pymunk
 from Game import Game
@@ -20,6 +21,15 @@ def should_quit_loop(event):
     if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
         return True
 
+def setup_collision_handlers_for_balls(game):
+    COLLISION_TYPES = [COLLTYPE_ZEYTIN, COLLTYPE_LAHMACUN, COLLTYPE_MAGNOLYA, COLLTYPE_MUCVER, COLLTYPE_KABAK, COLLTYPE_HANIMGOBEGI, COLLTYPE_ISPANAK]
+    for coltype in COLLISION_TYPES:
+        handler = game.space.add_collision_handler(coltype, coltype)
+        handler.post_solve = partial(game.ball_collision_handler, collision_type=coltype)
+
+    handler = game.space.add_collision_handler(COLLTYPE_LAHMACUN, COLLTYPE_MOUSE)
+    handler.pre_solve = Mouse.mouse_coll_func
+
 def main():
     ### PyGame init
     pygame.init()
@@ -35,12 +45,11 @@ def main():
     mouse = Mouse()
     space.add(mouse.body, mouse.shape)
 
-    space.add_collision_handler(
-        COLLTYPE_MOUSE, COLLTYPE_BALL
-    ).pre_solve = Mouse.mouse_coll_func
-
     ### Game Logic
     game = Game(screen=screen, space=space)
+
+    ### Collision Handlers
+    setup_collision_handlers_for_balls(game)
 
     should_update = True
 

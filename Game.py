@@ -50,3 +50,7 @@ class Game:
     def add_ball(self, ball):
         self.space.add(ball.body, ball.shape)
         self.balls.append(ball)
+
+    def ball_collision_handler(self, arbiter, space, data, collision_type=0):
+        print("Collision")
+        return True
