@@ -51,6 +51,29 @@ class Game:
         self.space.add(ball.body, ball.shape)
         self.balls.append(ball)
 
-    def ball_collision_handler(self, arbiter, space, data, collision_type=0):
-        print("Collision")
-        return True
+    def remove_ball(self, ball):
+        self.space.remove(ball.body, ball.shape)
+        self.balls.remove(ball)
+
+
+    def find_ball_by_shape(self, shape):
+        return self.find_ball_by_coordinates(shape.body.position.x, shape.body.position.y)
+
+    def find_ball_by_coordinates(self, x, y):
+        for ball in self.balls:
+            if ball.shape.point_query((x, y)):
+                return ball
+        return None
+
+    def ball_collision_handler(self, arbiter, space, data):
+        ball1, ball2 = self.find_ball_by_shape(arbiter.shapes[0]), self.find_ball_by_shape(arbiter.shapes[1])
+
+        if ball1 is None or ball2 is None:
+            return
+        
+        if ball1.entity_id == ball2.entity_id:
+            self.remove_ball(ball1)
+            self.remove_ball(ball2)
+
+    
+    

@@ -8,12 +8,14 @@ from utils import flipy
 
 class Ball:
 
-    def __init__(self, body, shape):
-       self.entity_id = "ball"
+    def __init__(self, body, shape, entity_id, sprite, next_ball_class, is_winning_ball):
        self.body = body
        self.shape = shape
        self.shape.collision_type = COLLTYPE_BALL
-       self.sprite = None
+       self.sprite = sprite
+       self.entity_id = entity_id
+       self.next_ball_class = next_ball_class
+       self.is_winning_ball = is_winning_ball    
 
     def draw(self, screen):
         if (self.sprite is None):
