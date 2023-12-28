@@ -1,5 +1,7 @@
 import pygame
 import pymunk
+from GameObjects.Bucket import Bucket
+from constants import SCREEN_SIZE
 
 from utils import flipy
 
@@ -8,20 +10,19 @@ class Game:
     def __init__(self, screen, space):
         self.screen = screen
         self.space = space
+
+        screen_x, screen_y = SCREEN_SIZE
+        self.bucket = Bucket(center_position=(screen_x / 2, screen_y / 2 - 100), width=screen_x * 0.6, height=screen_y * 0.5, static_body=self.space.static_body)
+        self.bucket.add_self_to_space(self.space)
         self.balls = []
 
-        self.static_lines = [
-            pymunk.Segment(space.static_body, (11.0, 280.0), (407.0, 246.0), 0.0),
-            pymunk.Segment(space.static_body, (407.0, 246.0), (407.0, 343.0), 0.0),
-        ]
-        self.space.add(*self.static_lines)
         
-
+        
     
     def draw(self):
         self.screen.fill(pygame.Color("white"))
         self._draw_title()
-        self._draw_static_lines()
+        self.bucket.draw(self.screen)
         for ball in self.balls:
             ball.draw(self.screen)
 
@@ -44,7 +45,7 @@ class Game:
             pv2 = body.position + line.b.rotated(body.angle)
             p1 = round(pv1.x), round(flipy(pv1.y))
             p2 = round(pv2.x,), round(flipy(pv2.y))
-            pygame.draw.lines(self.screen, pygame.Color("lightgray"), False, [p1, p2])
+            pygame.draw.lines(self.screen, pygame.Color("grey"), False, [p1, p2])
 
     def add_ball(self, ball):
         self.space.add(ball.body, ball.shape)
