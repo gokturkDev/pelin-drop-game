@@ -34,10 +34,7 @@ class Game:
 
     def _draw_title(self):
         font = pygame.font.Font(None, 16)
-        text = """LMB: Create ball
-        LMB + Shift: Create many balls
-        RMB: Drag to create wall, release to finish
-        Space: Pause physics simulation"""
+        text = """Yemekleri Düşürmeden Ispanağa Tamamla! <3"""
         y = 5
         for line in text.splitlines():
             text = font.render(line, 1, pygame.Color("black"))

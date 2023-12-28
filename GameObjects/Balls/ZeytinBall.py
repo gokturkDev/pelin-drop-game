@@ -12,9 +12,9 @@ class ZeytinBall(Ball):
         body = pymunk.Body(2, 100)
         body.position = position
 
-        shape = pymunk.Circle(body, 15, (0, 0))
+        shape = pymunk.Circle(body, 10, (0, 0))
         shape.friction = 0.5
 
-        sprite = load_sprite("zeytin.png", 20, 30)
+        sprite = load_sprite("zeytin.png", 15, 25)
 
         super().__init__(body, shape, entity_id, sprite, LahmacunBall, False)
