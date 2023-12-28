@@ -11,7 +11,7 @@ class MagnolyaBall(Ball):
         body = pymunk.Body(20, 100)
         body.position = position
 
-        shape = pymunk.Circle(body, 40, (0, 0))
+        shape = pymunk.Circle(body, 35, (0, 0))
         shape.friction = 0.5
 
         sprite = load_sprite("magnolya.png", 60, 70)

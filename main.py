@@ -30,10 +30,11 @@ def setup_collision_handler_for_deadzone(game):
     handler = game.space.add_collision_handler(COLLTYPE_DEADZONE, COLLTYPE_BALL)
     handler.post_solve = game.deadzone_collision_handler
 
-def display_game_over(screen):
+def display_game_over(game,screen):
     screen.fill(pygame.Color("white"))
     font = pygame.font.Font(None, 16)
-    text = """GAME OVER"""
+    win_or_lose = "You won!" if game.game_won else "You lost!"
+    text = f"""GAME OVER: {win_or_lose}"""
     text_surface = font.render(text, True, pygame.Color("black"))
     text_rect = text_surface.get_rect(center=(SCREEN_SIZE[0] / 2, SCREEN_SIZE[1] / 2))
     screen.blit(text_surface, text_rect)
@@ -60,12 +61,14 @@ def main():
     setup_collision_handler_for_balls(game)
     setup_collision_handler_for_deadzone(game)
 
-
+    ### Game Loop
+    restart_game = False
 
     while running:
         if (game.game_ended):
-            display_game_over(screen)
+            display_game_over(game, screen)
             if (pygame.event.peek(pygame.MOUSEBUTTONDOWN)):
+                restart_game = True
                 break
         else:
             for event in pygame.event.get():
@@ -85,7 +88,8 @@ def main():
         pygame.display.set_caption("fps: " + str(clock.get_fps()))
 
     pygame.quit()
-    main()
+    if (restart_game):
+        main()
 
 if __name__ == '__main__':
     main()

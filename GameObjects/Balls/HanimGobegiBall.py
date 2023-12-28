@@ -11,7 +11,7 @@ class HanimGobegiBall(Ball):
         body = pymunk.Body(25, 100)
         body.position = position
 
-        shape = pymunk.Circle(body, 55, (0, 0))
+        shape = pymunk.Circle(body, 50, (0, 0))
         shape.friction = 0.5
 
         sprite = load_sprite("hanimgobegi.png", 95, 100)

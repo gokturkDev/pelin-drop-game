@@ -11,7 +11,7 @@ class LahmacunBall(Ball):
         body = pymunk.Body(10, 100)
         body.position = position
 
-        shape = pymunk.Circle(body, 30, (0, 0))
+        shape = pymunk.Circle(body, 25, (0, 0))
         shape.friction = 0.5
 
         sprite = load_sprite("lahmacun.png", 60, 70)

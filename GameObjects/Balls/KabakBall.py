@@ -11,7 +11,7 @@ class KabakBall(Ball):
         body = pymunk.Body(25, 100)
         body.position = position
 
-        shape = pymunk.Circle(body, 50, (0, 0))
+        shape = pymunk.Circle(body, 45, (0, 0))
         shape.friction = 0.5
 
         sprite = load_sprite("kabak.png", 75, 85)

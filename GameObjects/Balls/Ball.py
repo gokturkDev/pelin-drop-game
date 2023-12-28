@@ -27,7 +27,6 @@ class Ball:
         p = p - offset
 
         screen.blit(rotated_sprite, (round(p.x), round(p.y)))
-        self.debug_draw(screen)
 
     def debug_draw(self, screen):
         r = self.shape.radius

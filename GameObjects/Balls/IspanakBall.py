@@ -10,7 +10,7 @@ class IspanakBall(Ball):
         body = pymunk.Body(30, 100)
         body.position = position
 
-        shape = pymunk.Circle(body, 60, (0, 0))
+        shape = pymunk.Circle(body, 55, (0, 0))
         shape.friction = 0.5
 
         sprite = load_sprite("ispanak.png", 105, 115)
