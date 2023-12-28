@@ -1,4 +1,6 @@
 import pygame
+from GameObjects.Balls.HanimGobegiBall import HanimGobegiBall
+from GameObjects.Balls.KabakBall import KabakBall
 from GameObjects.Balls.LahmacunBall import LahmacunBall
 from GameObjects.Balls.MagnolyaBall import MagnolyaBall
 from GameObjects.Balls.MucverBall import MucverBall
@@ -28,11 +30,16 @@ class BallSpawner:
 
         self.last_spawn = now
         rand = random.random()
-        if (rand > 0.7):
+        print(rand)
+        if (rand < 0.6):
             return ZeytinBall(position=(self.x, SCREEN_SIZE[1] - 20))
-        elif (rand < 0.9):
+        elif (rand < 0.8):
             return LahmacunBall(position=(self.x, SCREEN_SIZE[1] - 20))
-        elif (rand < 0.95):
+        elif (rand < 8):
             return MagnolyaBall(position=(self.x, SCREEN_SIZE[1] - 20))
-        else:
+        elif (rand < 9):
             return MucverBall(position=(self.x, SCREEN_SIZE[1] - 20))
+        elif (rand < 9.5):
+            return KabakBall(position=(self.x, SCREEN_SIZE[1] - 20))
+        else:
+            return HanimGobegiBall(position=(self.x, SCREEN_SIZE[1] - 20))
