@@ -8,12 +8,12 @@ class KabakBall(Ball):
     def __init__(self, position):
         entity_id = "kabak_ball"
 
-        body = pymunk.Body(10, 100)
+        body = pymunk.Body(25, 100)
         body.position = position
 
-        shape = pymunk.Circle(body, 30, (0, 0))
+        shape = pymunk.Circle(body, 50, (0, 0))
         shape.friction = 0.5
 
-        sprite = load_sprite("kabak.png", 60, 70)
+        sprite = load_sprite("kabak.png", 75, 85)
 
         super().__init__(body, shape, entity_id, sprite, HanimGobegiBall, False)

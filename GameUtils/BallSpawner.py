@@ -28,9 +28,9 @@ class BallSpawner:
 
         self.last_spawn = now
         rand = random.random()
-        if (rand > 0.5):
+        if (rand > 0.7):
             return ZeytinBall(position=(self.x, SCREEN_SIZE[1] - 20))
-        elif (rand < 0.85):
+        elif (rand < 0.9):
             return LahmacunBall(position=(self.x, SCREEN_SIZE[1] - 20))
         elif (rand < 0.95):
             return MagnolyaBall(position=(self.x, SCREEN_SIZE[1] - 20))
