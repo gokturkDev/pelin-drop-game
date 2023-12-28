@@ -1,6 +1,6 @@
 import pymunk
 from GameObjects.Balls.Ball import Ball
-from GameObjects.Balls.ZeytinBall import ZeytinBall
+from GameObjects.Balls.MagnolyaBall import MagnolyaBall
 from utils import load_sprite
 
 
@@ -16,4 +16,4 @@ class LahmacunBall(Ball):
 
         sprite = load_sprite("lahmacun.png", 60, 70)
 
-        super().__init__(body, shape, entity_id, sprite, ZeytinBall, False)
+        super().__init__(body, shape, entity_id, sprite, MagnolyaBall, False)

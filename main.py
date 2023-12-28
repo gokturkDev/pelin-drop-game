@@ -3,8 +3,8 @@ import pygame
 import pymunk
 from Game import Game
 from GameLoop.process_input import process_input
+from GameLoop.update import update
 from constants import *
-from GameObjects.Mouse import Mouse
 from utils import flipy
 
 
@@ -36,10 +36,6 @@ def main():
     space = pymunk.Space()
     space.gravity = 0.0, -900.0
 
-    ### Mouse
-    mouse = Mouse()
-    space.add(mouse.body, mouse.shape)
-
     ### Game Logic
     game = Game(screen=screen, space=space)
 
@@ -58,6 +54,8 @@ def main():
             
         if should_update:
             time_step_forward(space)
+
+        update(game, clock)
 
         render(game)
        

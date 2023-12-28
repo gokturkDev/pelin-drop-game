@@ -1,6 +1,7 @@
 import pygame
 import pymunk
 from GameObjects.Bucket import Bucket
+from GameUtils.BallSpawner import BallSpawner
 from constants import SCREEN_SIZE
 
 from utils import flipy
@@ -15,7 +16,7 @@ class Game:
         self.bucket = Bucket(center_position=(screen_x / 2, screen_y / 2 - 100), width=screen_x * 0.6, height=screen_y * 0.5, static_body=self.space.static_body)
         self.bucket.add_self_to_space(self.space)
         self.balls = []
-
+        self.ball_spawner = BallSpawner()
         
         
     
@@ -23,6 +24,7 @@ class Game:
         self.screen.fill(pygame.Color("white"))
         self._draw_title()
         self.bucket.draw(self.screen)
+        self.ball_spawner.draw(self.screen)
         for ball in self.balls:
             ball.draw(self.screen)
 

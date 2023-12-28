@@ -1,13 +1,7 @@
-def mouse_ball_collide_handler(arbiter, space, data):
-    pass
+import pygame
 
 
-class LevelUpHandler:
-    def __init__(self, game):
-        self.game = game
-
-    def ball_collide_handle(self, arbiter, space, data):
-        ball1, ball2 = arbiter.shapes
-        print()
+def update(game, clock):
+    game.ball_spawner.update_position(pygame.mouse.get_pos()[0])
 
     
