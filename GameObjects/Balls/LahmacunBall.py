@@ -15,4 +15,4 @@ class LahmacunBall(Ball):
 
         sprite = load_sprite("lahmacun.png", 60, 70)
 
-        super().__init__(body, shape, entity_id, sprite, None, True)
+        super().__init__(body, shape, entity_id, sprite, LahmacunBall, True)

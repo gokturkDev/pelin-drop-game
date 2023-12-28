@@ -67,15 +67,20 @@ class Game:
 
     def ball_collision_handler(self, arbiter, space, data):
         ball1, ball2 = self.find_ball_by_shape(arbiter.shapes[0]), self.find_ball_by_shape(arbiter.shapes[1])
-
-        print(arbiter.shapes[0].body.id, arbiter.shapes[1].body.id)
-        print(arbiter.shapes[0].body.position, arbiter.shapes[1].body.position)
         if ball1 is None or ball2 is None:
             return
         
         if ball1.entity_id == ball2.entity_id:
             self.remove_ball(ball1)
             self.remove_ball(ball2)
+
+            new_ball_position = ((ball1.body.position.x + ball2.body.position.x) / 2, (ball1.body.position.y + ball2.body.position.y) / 2)
+
+            new_ball = ball1.next_ball_class(new_ball_position)
+            impulse = arbiter.total_impulse.x, arbiter.total_impulse.y * -1
+            new_ball.body.apply_impulse_at_local_point(impulse, (0, 0))
+            
+            self.add_ball(new_ball)
             
 
     
