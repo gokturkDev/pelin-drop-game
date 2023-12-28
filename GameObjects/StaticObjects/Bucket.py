@@ -1,10 +1,11 @@
 import pygame
 import pymunk
+from GameObjects.StaticObjects.StaticObject import StaticObject
 
 from utils import flipy
 
 
-class Bucket:
+class Bucket(StaticObject):
 
     def __init__(self, center_position, width, height, static_body):
 
