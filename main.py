@@ -46,12 +46,11 @@ def main():
         for event in pygame.event.get():
             process_input(event, game)
             
-
-    
         if should_update:
             time_step_forward(space)
-       
 
+        render(game)
+       
         ### Flip screen
         pygame.display.flip()
         clock.tick(50)
