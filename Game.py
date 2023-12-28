@@ -61,19 +61,22 @@ class Game:
 
     def find_ball_by_coordinates(self, x, y):
         for ball in self.balls:
-            if ball.shape.point_query((x, y)):
+            if ball.body.position.x == x and ball.body.position.y == y:
                 return ball
         return None
 
     def ball_collision_handler(self, arbiter, space, data):
         ball1, ball2 = self.find_ball_by_shape(arbiter.shapes[0]), self.find_ball_by_shape(arbiter.shapes[1])
 
+        print(arbiter.shapes[0].body.id, arbiter.shapes[1].body.id)
+        print(arbiter.shapes[0].body.position, arbiter.shapes[1].body.position)
         if ball1 is None or ball2 is None:
             return
         
         if ball1.entity_id == ball2.entity_id:
             self.remove_ball(ball1)
             self.remove_ball(ball2)
+            
 
     
     
