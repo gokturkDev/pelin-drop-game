@@ -1,3 +1,6 @@
+from constants import SCREEN_SIZE
+
+
 def flipy(y):
     """Small hack to convert chipmunk physics to pygame coordinates"""
-    return -y + 600
+    return -y + SCREEN_SIZE[1]
