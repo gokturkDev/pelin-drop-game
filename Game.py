@@ -1,6 +1,7 @@
 import pygame
 import pymunk
-from GameObjects.Bucket import Bucket
+from GameObjects.StaticObjects.Bucket import Bucket
+from GameObjects.StaticObjects.Deadzone import Deadzone
 from GameUtils.BallSpawner import BallSpawner
 from constants import SCREEN_SIZE
 
@@ -13,11 +14,14 @@ class Game:
         self.space = space
 
         screen_x, screen_y = SCREEN_SIZE
+
         self.bucket = Bucket(center_position=(screen_x / 2, screen_y / 2 - 100), width=screen_x * 0.6, height=screen_y * 0.5, static_body=self.space.static_body)
         self.bucket.add_self_to_space(self.space)
         self.balls = []
         self.ball_spawner = BallSpawner()
         
+        self.game_ended = False
+        self.game_won = False
         
     
     def draw(self):
@@ -39,6 +43,7 @@ class Game:
             text = font.render(line, 1, pygame.Color("black"))
             self.screen.blit(text, (5, y))
             y += 10
+
 
     def _draw_static_lines(self):
         for line in self.static_lines:
@@ -73,17 +78,22 @@ class Game:
             return
         
         if ball1.entity_id == ball2.entity_id:
-            self.remove_ball(ball1)
-            self.remove_ball(ball2)
 
-            new_ball_position = ((ball1.body.position.x + ball2.body.position.x) / 2, (ball1.body.position.y + ball2.body.position.y) / 2)
+            if (ball1.next_ball_class is not None):
+                self.remove_ball(ball1)
+                self.remove_ball(ball2)
 
-            new_ball = ball1.next_ball_class(new_ball_position)
-            impulse = arbiter.total_impulse.x, arbiter.total_impulse.y * -1
-            new_ball.body.apply_impulse_at_local_point(impulse, (0, 0))
-            
-            self.add_ball(new_ball)
-            
+                new_ball_position = ((ball1.body.position.x + ball2.body.position.x) / 2, (ball1.body.position.y + ball2.body.position.y) / 2)
 
-    
-    
+                new_ball = ball1.next_ball_class(new_ball_position)
+                impulse = arbiter.total_impulse.x, arbiter.total_impulse.y * -1
+                new_ball.body.apply_impulse_at_local_point(impulse, (0, 0))
+                
+                self.add_ball(new_ball)
+            else:
+                self.game_ended = True
+                self.game_won = ball1.is_winning_ball
+
+    def deadzone_collision_handler(self, arbiter, space, data):
+        self.game_ended = True
+        self.game_won = False

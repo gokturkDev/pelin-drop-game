@@ -30,7 +30,6 @@ class BallSpawner:
 
         self.last_spawn = now
         rand = random.random()
-        print(rand)
         if (rand < 0.6):
             return ZeytinBall(position=(self.x, SCREEN_SIZE[1] - 20))
         elif (rand < 0.8):

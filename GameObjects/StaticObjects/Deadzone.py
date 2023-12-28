@@ -6,8 +6,9 @@ from utils import flipy
 
 
 class Deadzone(StaticObject):
-    def __init__(self, y):
+    def __init__(self, y, static_body):
         self.y = y
+        self.static_body = static_body
         self.deadzone_line = self._create_deadzone_line()
 
     
