@@ -8,7 +8,7 @@ from utils import flipy
 class Ball:
 
     def __init__(self, body, shape):
-       
+       self.entity_id = "ball"
        self.body = body
        self.shape = shape
 
